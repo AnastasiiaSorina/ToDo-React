@@ -22,7 +22,9 @@ A card for each task with a checklist.
 - [x] Creation of Popup.
 - [x] Adding functionality Popup.
 - [x] Layout of the first page of the Content
-- [ ] Screw color selection from the server
-- [ ] Functionality of the button: Delete list
+- [x] Screw color selection from the server
+- [x] Functionality of the button: Delete list
 - [ ] Switching between lists
+- [ ] View task history
     ...
+![To Do List](https://user-images.githubusercontent.com/26440126/171933397-e0733823-f592-4ae5-83a6-89f9a3705e6d.jpg)
