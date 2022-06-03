@@ -6,10 +6,12 @@ import plusSvg from '../../assets/img/plus.png';
 import closeIcon from '../../assets/img/close-icon.jpg'
 
 import './AddList.scss';
+import axios from "axios";
 
 const AddList = ({colors, onAdd}) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
     const [seletedColor, selectColor] = useState(3);
+    const [isLoading, setIsLoading] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
     useEffect (() => {
@@ -22,16 +24,30 @@ const AddList = ({colors, onAdd}) => {
         setVisiblePopup(false);
         setInputValue('');
         selectColor(colors[0].id);
-    }
+    };
+
     const addList = () => {
         if (!inputValue) {
             alert('enter list name');
             return;
         }
-        const color = colors.filter(c => c.id === seletedColor)[0].name;
-        onAdd({ id: Math.random(), name: inputValue, color});
+        setIsLoading(true);
+        axios.post('http://localhost:3001/lists', {name: inputValue, colorId: seletedColor
+      })
+      .then(({ data }) => {
+        const color = colors.filter(c => c.id === seletedColor)[0];
+        const listObj = { ...data, color, tasks: [] };
+        onAdd(listObj);
         onClose();
-};
+      })
+      .catch(() => {
+        alert('Error adding list!');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
 
 return(
         <div className="add-list">
@@ -67,7 +83,9 @@ return(
                     ))}
                 </ul>
                 </div>
-                <button onClick={addList} className="button">Add</button>
+                <button onClick={addList} className="button">
+                    {isLoading ? 'Adding...' : 'Add'}
+                </button>
             </div>
             )}
         </div>

@@ -36,7 +36,12 @@ function App() {
             name: 'All tasks',
           }
         ]} />
-        <List items={lists} onRemove={(list) => { console.log(list); }} isRemovable />
+        <List items={lists} onRemove={id => {
+              const newLists = lists.filter(item => item.id !== id);
+              setLists(newLists);
+            }}
+            
+             isRemovable />
         <AddList onAdd={onAddList} colors={colors} />
       </div>
       <div className="todo__tasks">

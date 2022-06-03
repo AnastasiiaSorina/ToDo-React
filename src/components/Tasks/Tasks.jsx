@@ -18,7 +18,7 @@ const Tasks = () => {
                             <img src={markIcon} alt="mark" />
                         </label>
                     </div>
-                    <input value="RedaxJS, Hooks(useState, useEffect, ..)" />
+                    
                 </div>
             </div>
         </div>
